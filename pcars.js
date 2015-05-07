@@ -44,10 +44,11 @@ function processJson(data) {
 			raceData.trackName = parsed.eventInformation.mTrackLocation;
 			raceData.startTime = new Date().toISOString();
 			raceData.folderName = raceData.startTime.replace(/:/g, "-") + " - " + raceData.trackName + " - " + raceData.carName;
-			fs.mkdirSync(__dirname + "/" + raceData.folderName);
+			fs.mkdirSync(__dirname + "/logs/" + raceData.folderName);
 			inRace = true;
 		}
 	} catch (err) {
+		console.log(err);
 		console.log("Game is propably not running");
 		return;
 	}
@@ -61,6 +62,16 @@ function processJson(data) {
 	});
 }
 
+try {
+	fs.mkdirSync(__dirname + "/logs");
+} catch (err) {
+	if (err.code != "EEXIST") {
+		console.log(err);
+		return;
+	}
+	//Logs folder exists, no need to create one
+}
+
 setInterval(function() {
 	readAndWrite();
-}, 33);
+}, 100);

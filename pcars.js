@@ -2,6 +2,7 @@ var http = require("http");
 var fs = require("fs");
 var lowdb = require("lowdb");
 var CrestReader = require("./CrestReader.js");
+var ReplayReader = require("./ReplayReader.js");
 var inRace = false;
 var currentDb = undefined;
 var raceData = {
@@ -60,8 +61,15 @@ try {
 	//Logs folder exists, no need to create one
 }
 
-var crestReader = new CrestReader();
+/* var crestReader = new CrestReader();
 crestReader.on("data-update", processJson);
-crestReader.startAutoPoll();
+crestReader.startAutoPoll();*/
+
+var replayReader = new ReplayReader("test.json");
+replayReader.on("data-update", function(data) {
+	console.log("CALLBACK");
+	console.log(data);
+});
+replayReader.startAutoPoll();
 
 

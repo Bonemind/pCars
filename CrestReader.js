@@ -3,9 +3,18 @@ var http = require("http");
 
 //CrestReader class, reads data from the CREST tool
 //Emits a data-update event when CREST data was parsed
-function CrestReader() {
+function CrestReader(config) {
 	this.url = "http://localhost:8080/crest/v1/api";
 	this.pollInterval = 100;
+
+	if (config) {
+		for (var prop in config) {
+			if (this.hasOwnProperty(prop)) {
+				this[prop] = config[prop];
+				console.log(this[prop]);
+			}
+		}
+	}
 
 	events.EventEmitter.call(this);
 	this.intervalTimer = undefined;
@@ -44,7 +53,7 @@ CrestReader.prototype.startAutoPoll = function() {
 		return;
 	}
 	this.intervalTimer = setInterval(function() {
-		this.readData();
+		self.readData();
 	}.bind(this), this.pollInterval);
 }.bind(this);
 

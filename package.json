@@ -2,7 +2,7 @@
   "name": "PCars",
   "version": "0.0.1-a",
   "description": "Project cars telemetry toolkit",
-  "main": "pcars.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

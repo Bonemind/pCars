@@ -1,0 +1,12 @@
+{
+  "name": "pCars gui",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Bonemind/pCars",
+  "authors": [
+    "Bonemind <Subhime@gmail.com>"
+  ],
+  "description": "pCars Telemetry gui",
+  "main": "main.js",
+  "license": "MIT",
+  "private": true
+}

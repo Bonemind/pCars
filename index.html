@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.css">
+	<!-- <script type="text/javascript" src="bower_components/materialize/dist/js/materialize.js"></script> -->
+	<script type="text/javascript">
+		window.$ = window.jQuery = require(__dirname + "/bower_components/jquery/dist/jquery.js");
+		window.riot = require(__dirname + "/bower_components/riot/riot.js");
+	</script>
+	<script type="text/javascript" src="tags/all.js"></script>
+</head>
+<body>
+	<h1>PcarsTest</h1>
+	<live-data></live-data>
+	
+	<script type="text/javascript">
+		riot.mount("live-data");
+	</script>
+</body>
+</html>

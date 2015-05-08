@@ -1,6 +1,8 @@
 var http = require("http");
 var fs = require("fs");
+var lowdb = require("lowdb");
 var inRace = false;
+var currentDb = undefined;
 var raceData = {
 	carName: "",
 	trackName: "",
@@ -32,6 +34,10 @@ function processJson(data) {
 	//If we aren't in a race, cleanup data and return
 	try {
 		if (parsed.gameStates.mGameState < 2) {
+			if (currentDb !== undefined) {
+				currentDb.saveSync();
+				currentDb = undefined;
+			}
 			raceData.trackName = "";
 			raceData.carName = "";
 			raceData.startTime = "";
@@ -44,7 +50,10 @@ function processJson(data) {
 			raceData.trackName = parsed.eventInformation.mTrackLocation;
 			raceData.startTime = new Date().toISOString();
 			raceData.folderName = raceData.startTime.replace(/:/g, "-") + " - " + raceData.trackName + " - " + raceData.carName;
-			fs.mkdirSync(__dirname + "/logs/" + raceData.folderName);
+			currentDb = lowdb(__dirname + "/logs/" + raceData.folderName + ".json", {
+				autosave: false
+			});
+			console.log("Race start detected: " + raceData.trackName + " " + raceData.carName);
 			inRace = true;
 		}
 	} catch (err) {
@@ -52,14 +61,8 @@ function processJson(data) {
 		console.log("Game is propably not running");
 		return;
 	}
-
-	//Write data
-	var timestamp = new Date().getTime();
-	fs.writeFile(__dirname + "/logs/" + raceData.folderName + "/" + timestamp, data, function(err) {
-		if (err) {
-			console.log(err);
-		}
-	});
+	parsed.eventInformation.currentLap = parsed.participants.mParticipantInfo[parsed.participants.mViewedParticipantIndex].mCurrentLap;
+	currentDb("datapoints").push(parsed);
 }
 
 try {

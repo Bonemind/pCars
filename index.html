@@ -16,7 +16,14 @@
 	<live-data></live-data>
 	
 	<script type="text/javascript">
-		riot.mount("live-data");
+
+		var ReplayReader = require("./lib/ReplayReader.js");
+		var replayReader = new ReplayReader("test.json");
+		replayReader.on("ssdata-update", function(data) {
+			console.log(data);
+		});
+		riot.mount("live-data", {dataProvider: replayReader});
+		replayReader.startAutoPoll();
 	</script>
 </body>
 </html>

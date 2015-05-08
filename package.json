@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/Bonemind/pCars",
   "dependencies": {
+    "electron-prebuilt": "^0.25.2",
     "lodash": "^3.8.0",
-    "lowdb": "^0.7.3"
+    "lowdb": "^0.7.3",
+    "riot": "^2.0.15"
   }
 }

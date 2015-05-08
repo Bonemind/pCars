@@ -1,5 +1,7 @@
 var events = require("events");
 var http = require("http");
+var util = require("util");
+var _ = require("lodash");
 
 //CrestReader class, reads data from the CREST tool
 //Emits a data-update event when CREST data was parsed
@@ -18,10 +20,10 @@ function CrestReader(config) {
 
 	events.EventEmitter.call(this);
 	this.intervalTimer = undefined;
-	self = this;
+	_.bindAll(this);
 }
 
-CrestReader.prototype.__proto__ = events.EventEmitter.prototype;
+util.inherits(CrestReader, events.EventEmitter);
 
 //Actually reads data from the CREST api with a get request
 CrestReader.prototype.readData = function() {
@@ -35,7 +37,7 @@ CrestReader.prototype.readData = function() {
 		res.on("end", function() {
 			try {
 				JSON.parse(data);
-				self.emit("data-update", data);
+				this.emit("data-update", data);
 			} catch(err) {
 				
 				console.log("Json parse error, skipping datapoint");
@@ -43,7 +45,7 @@ CrestReader.prototype.readData = function() {
 			}
 		});
 	});
-}
+};
 
 //Schedules an intervaltimer to start polling
 //If one is already running, this is a no-op
@@ -53,9 +55,9 @@ CrestReader.prototype.startAutoPoll = function() {
 		return;
 	}
 	this.intervalTimer = setInterval(function() {
-		self.readData();
+		this.readData();
 	}.bind(this), this.pollInterval);
-}.bind(this);
+};
 
 //Stops the autopoller
 //If none is running, this is a no-opt
@@ -65,5 +67,5 @@ CrestReader.prototype.stopAutoPoll = function() {
 		this.intervalTimer = undefined;
 		console.log("stopped");
 	}
-}.bind(this);
+};
 module.exports = CrestReader;

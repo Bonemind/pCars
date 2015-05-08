@@ -1,25 +1,31 @@
+"use strict";
 var lowdb = require("lowdb");
 var events = require("events");
+var util = require("util");
+var _ = require("lodash");
 
 function ReplayReader(replayFile) {
 	this.replayFile = replayFile;
 	this.db = lowdb(this.replayFile);
 	this.data = this.db("datapoints").value();
-	this.intervalTimer = 100;
+	this.intervalTimer = undefined;
+	this.pollInterval = 100;
 
 	events.EventEmitter.call(this);
-	self = this;
+	_.bindAll(this);
 }
-
-ReplayReader.prototype.__proto__ = events.EventEmitter.prototype;
+util.inherits(ReplayReader, events.EventEmitter);
 
 //Actually reads data from the CREST api with a get request
 ReplayReader.prototype.readData = function() {
 	var currDatapoint = this.data.shift();
-	console.log("EMITTER");
-	console.log(currDatapoint);
-	self.emit("data-update", currDatapoint);
-}
+	this.emit("data-update", currDatapoint);
+	console.log(this.data.length);
+	if (this.data.length < 3150) {
+		this.stopAutoPoll();
+		this.emit("replay-done");
+	}
+};
 
 //Schedules an intervaltimer to start polling
 //If one is already running, this is a no-op
@@ -29,9 +35,9 @@ ReplayReader.prototype.startAutoPoll = function() {
 		return;
 	}
 	this.intervalTimer = setInterval(function() {
-		self.readData();
+		this.readData();
 	}.bind(this), this.pollInterval);
-}.bind(this);
+};
 
 //Stops the autopoller
 //If none is running, this is a no-opt
@@ -41,5 +47,5 @@ ReplayReader.prototype.stopAutoPoll = function() {
 		this.intervalTimer = undefined;
 		console.log("stopped");
 	}
-}.bind(this);
+};
 module.exports = ReplayReader;

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Bonemind/pCars",
   "dependencies": {
+    "lodash": "^3.8.0",
     "lowdb": "^0.7.3"
   }
 }

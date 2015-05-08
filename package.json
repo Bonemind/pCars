@@ -1,0 +1,22 @@
+{
+  "name": "PCars",
+  "version": "0.0.1-a",
+  "description": "Project cars telemetry toolkit",
+  "main": "pcars.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://bonemind@github.com/Bonemind/pCars"
+  },
+  "author": "Bonemind",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bonemind/pCars/issues"
+  },
+  "homepage": "https://github.com/Bonemind/pCars",
+  "dependencies": {
+    "lowdb": "^0.7.3"
+  }
+}

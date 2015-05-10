@@ -1,12 +1,17 @@
 <position-board>
+	<div class="card blue-grey darken-1">
+		<div class="card-content">
+			<span class="card-title">Positions</span>
 
-	<ul class="collection">
-		<li class="collection-item teal {darken-1: index == viewedParticipant, darken-4: index != parent.viewedParticipant }" each={ participant, index in participants }>
-			<span>
-				{ participant.mRacePosition } : { participant.mName } : { participant.mCurrentLapDistance }m
-			</span>
-		</li>
-	</ul>
+			<ul class="collection">
+				<li class="collection-item blue-grey {lighten-1: index == viewedParticipant, darken-2: index != parent.viewedParticipant }" each={ participant, index in participants }>
+					<span>
+						{ participant.mRacePosition } : { participant.mName } : { participant.mCurrentLapDistance }m
+					</span>
+				</li>
+			</ul>
+		</div>
+	</div>
 	<script>
 		this.participants = [];
 		this.viewedParticipant = -1;

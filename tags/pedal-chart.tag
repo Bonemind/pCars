@@ -15,7 +15,7 @@
 
 		this.data = {
 			title: {
-				text: "Gas and Brake"
+				text: "Throttle and Brake"
 			},
 			axisY: {
 				minimum: 0,
@@ -61,8 +61,18 @@
 
 		}
 
+		function onReset() {
+			this.time = 0;
+			this.chart.options.data[this.lineIndices.Gas].dataPoints = [];
+			this.chart.options.data[this.lineIndices.Brake].dataPoints = [];
+			this.chart.options.data[this.lineIndices.Clutch].dataPoints = [];
+			this.chart.render();
+		}
+
 		this.on("mount", function() {
 			opts.provider.on("data-update", onUpdate.bind(this));
+			opts.provider.on("data-reset", onReset.bind(this));
 		});
+
 	</script>
 </pedal-chart>

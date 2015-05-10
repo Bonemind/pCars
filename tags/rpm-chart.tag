@@ -1,4 +1,4 @@
-<gear-chart>
+<rpm-chart>
 	<div class="row blue">
 		<div id="chartelement" style="height: 200px; width: 100%;">
 		</div>
@@ -14,14 +14,11 @@
 
 		this.data = {
 			title: {
-				text: "Gears"
-			},
-			axisY: {
-				minimum: 0
+				text: "RPM"
 			},
 			data: [ 
 				{
-					type: "stepLine",
+					type: "line",
 					dataPoints: [
 					]
 				}
@@ -31,8 +28,7 @@
 
 		function onUpdate(data) {
 			this.time += 0.1;
-			this.chart.options.data[0].dataPoints.push({x: this.time, y: data.carState.mGear});
-			this.chart.options.axisY.maximum = data.carState.mNumGears;
+			this.chart.options.data[0].dataPoints.push({x: this.time, y: data.carState.mRpm});
 			this.chart.render();
 		}
 
@@ -47,4 +43,4 @@
 			opts.provider.on("data-reset", onReset.bind(this));
 		});
 	</script>
-</gear-chart>
+</rpm-chart>

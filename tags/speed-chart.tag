@@ -30,11 +30,17 @@
 			this.time += 0.1;
 			this.chart.options.data[0].dataPoints.push({x: this.time, y: data.carState.mSpeed});
 			this.chart.render();
+		}
 
+		function onReset() {
+			this.time = 0;
+			this.chart.options.data[0].dataPoints = [];
+			this.chart.render();
 		}
 
 		this.on("mount", function() {
 			opts.provider.on("data-update", onUpdate.bind(this));
+			opts.provider.on("data-reset", onReset.bind(this));
 		});
 	</script>
 </speed-chart>

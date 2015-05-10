@@ -10,20 +10,17 @@
 		window.riot = require(__dirname + "/bower_components/riot/riot.js");
 	</script>
 	<script type="text/javascript" src="tags/all.js"></script>
+	<script type="text/javascript" src="canvasjs/jquery.canvasjs.min.js"></script>
 </head>
-<body>
-	<h1>PcarsTest</h1>
-	<live-data></live-data>
-	
+<body class="grey darken-3 white-text">
+	<div class="row">
+		<h1>PcarsTest</h1>
+	</div>
+	<div class="row">
+		<live-data></live-data>
+	</div>
 	<script type="text/javascript">
-
-		var ReplayReader = require("./lib/ReplayReader.js");
-		var replayReader = new ReplayReader("test.json");
-		replayReader.on("ssdata-update", function(data) {
-			console.log(data);
-		});
-		riot.mount("live-data", {dataProvider: replayReader});
-		replayReader.startAutoPoll();
+		riot.mount("live-data");
 	</script>
 </body>
 </html>

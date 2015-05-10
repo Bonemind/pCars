@@ -1,12 +1,15 @@
 <live-data>
 	<div class="row">
-		<div class="col s4">
+		<div class="col s3">
+			<general-info provider={ provider }></general-info>
+		</div>
+		<div class="col s3">
 			<timings provider={ provider }></timings>
 		</div>
-		<div class="col s4">
+		<div class="col s3">
 			<temperatures provider={ provider }></timings>
 		</div>
-		<div class="col s4">
+		<div class="col s3">
 			<pressures provider={ provider }></pressures>
 		</div>
 	</div>

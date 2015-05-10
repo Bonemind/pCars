@@ -7,6 +7,9 @@
 			<div class="row">
 				<gear-chart provider={ replayReader }></gear-chart>
 			</div>
+			<div class="row">
+				<speed-chart provider={ replayReader }></speed-chart>
+			</div>
 		</div>
 		<div class="col s4">
 			<position-board test="adsad" provider={ replayReader }></position-board>

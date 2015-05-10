@@ -9,7 +9,8 @@
 		this.time = 0.0;
 		this.lineIndices = {
 			Gas: 0,
-			Brake: 1
+			Brake: 1,
+			Clutch: 2
 		}
 
 		this.data = {
@@ -18,7 +19,8 @@
 			},
 			legend: {
 				horizontalAlign: "center",
-				verticalAlign: "bottom"
+				verticalAlign: "bottom",
+				fontSize: 15
 			},
 			data: [ 
 				{
@@ -34,6 +36,13 @@
 					legendText: "Brake",
 					dataPoints: [
 					]
+				},
+				{
+					type: "line",
+					showInLegend: true,
+					legendText: "Clutch",
+					dataPoints: [
+					]
 				}
 			]
 		}
@@ -43,6 +52,7 @@
 			this.time += 0.1;
 			this.chart.options.data[this.lineIndices.Gas].dataPoints.push({x: this.time, y: data.carState.mThrottle});
 			this.chart.options.data[this.lineIndices.Brake].dataPoints.push({x: this.time, y: data.carState.mBrake});
+			this.chart.options.data[this.lineIndices.Clutch].dataPoints.push({x: this.time, y: data.carState.mClutch});
 			this.chart.render();
 
 		}

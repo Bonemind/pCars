@@ -22,9 +22,6 @@
 				<gear-chart provider={ provider }></gear-chart>
 			</div>
 			<div class="row">
-				<speed-chart provider={ provider }></speed-chart>
-			</div>
-			<div class="row">
 				<rpm-chart provider={ provider }></rpm-chart>
 			</div>
 		</div>
@@ -36,9 +33,5 @@
 	</div>
 	<script>
 		this.provider = opts.provider;
-		this.on("mount", function() {
-			//this.provider.startAutoPoll();
-		});
-		
 	</script>
 </live-data>

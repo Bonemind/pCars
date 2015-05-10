@@ -14,11 +14,26 @@
 
 		this.data = {
 			title: {
-				text: "RPM"
+				text: "RPM and Speed"
+			},
+			legend: {
+				horizontalAlign: "center",
+				verticalAlign: "bottom",
+				fontSize: 15
 			},
 			data: [ 
 				{
 					type: "line",
+					showInLegend: true,
+					legendText: "Rpm",
+					dataPoints: [
+					]
+				},
+				{
+					type: "line",
+					showInLegend: true,
+					legendText: "Speed (km/h)",
+					axisYType: "secondary",
 					dataPoints: [
 					]
 				}
@@ -29,12 +44,14 @@
 		function onUpdate(data) {
 			this.time += 0.1;
 			this.chart.options.data[0].dataPoints.push({x: this.time, y: data.carState.mRpm});
+			this.chart.options.data[1].dataPoints.push({x: this.time, y: data.carState.mSpeed});
 			this.chart.render();
 		}
 
 		function onReset() {
 			this.time = 0;
 			this.chart.options.data[0].dataPoints = [];
+			this.chart.options.data[1].dataPoints = [];
 			this.chart.render();
 		}
 

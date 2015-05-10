@@ -17,6 +17,10 @@
 			title: {
 				text: "Gas and Brake"
 			},
+			axisY: {
+				minimum: 0,
+				maximum: 1
+			},
 			legend: {
 				horizontalAlign: "center",
 				verticalAlign: "bottom",

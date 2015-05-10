@@ -16,6 +16,9 @@
 			title: {
 				text: "Gears"
 			},
+			axisY: {
+				minimum: 0
+			},
 			data: [ 
 				{
 					type: "stepLine",
@@ -29,8 +32,8 @@
 		function onUpdate(data) {
 			this.time += 0.1;
 			this.chart.options.data[0].dataPoints.push({x: this.time, y: data.carState.mGear});
+			this.chart.options.axisY.maximum = data.carState.mNumGears;
 			this.chart.render();
-
 		}
 
 		this.on("mount", function() {

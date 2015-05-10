@@ -8,5 +8,9 @@
   "description": "pCars Telemetry gui",
   "main": "main.js",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "materialize": "~0.96.1",
+    "riot": "~2.0.15"
+  }
 }

@@ -33,5 +33,8 @@
 	</div>
 	<script>
 		this.provider = opts.provider;
+		this.on("unmount", function() {
+			this.provider.removeAllListeners();
+		}.bind(this));
 	</script>
 </live-data>
